@@ -17,7 +17,6 @@ https://www.udemy.com/curso-docker/learn/v4/overview
 9. [Seção: 9 - Projeto para Envio de E-mails com Workers (11)](#parte9)     
 ---
 
-
 ## <a name="parte1">Seção: 1 - Introdução (5)</a>
 
 - [Mateiral do Curso/Instrutor](https://github.com/josemalcher/curso-docker)
@@ -115,10 +114,13 @@ Nestes 4 anos ele tem se tornado cada vez mais popular e uma solução real para
 
 ---
 
-
 ## <a name="parte3"> Seção: 3 - Instalação (4)</a>
 
+#### 2.1. Docker Engine e Docker Machine
 
+- Instalação (Linux, Microsoft Windows e MacOS)
+- Uso do Docker Machine
+- Uso do Docker na nuvem, Amazon, possivelmente outros
 
 [Voltar ao Índice](#indice)
 
