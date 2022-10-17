@@ -22,12 +22,11 @@ https://www.udemy.com/curso-docker/learn/v4/overview
 
 - [Mateiral do Curso/Instrutor](https://github.com/josemalcher/curso-docker)
 
-- [PDF do curso](pdf/apostila-docker.pdf)
+- [PDF do curso](http://files.cod3r.com.br/apostila-docker.pdf)[ ou PDF do curso local](https://github.com/ClaudioMendonca-Eng/Udemy-Docker-Ferramenta-essencial-para-Desenvolvedores/blob/main/pdf/Apostila-Docker.pdf)
 
 [Voltar ao Índice](#indice)
 
 ---
-
 
 ## <a name="parte2"> Seção: 2 - Conceitos (6)</a>
 
@@ -61,8 +60,6 @@ Mesmo utilizando o mesmo kernel é possível utilizar outra distribuição com v
 
 ![](img/comparacao-vms×containers.png)
 
-Figura 1. Comparação VMs × Containers
-
 Virtual Machine (máquina virtual), recurso extremamente usado atualmente para isolamento de serviços, replicação e melhor aproveitamento do poder de processamente de uma máquina física.
 
 Devo trocar então minha VM por um container? Nem sempre, os containers Docker possuem algumas limitações em relação as VMs:
@@ -70,6 +67,14 @@ Devo trocar então minha VM por um container? Nem sempre, os containers Docker p
 - Não é possível usar um kernel diferente do host, o Docker Engine estará executando sob uma determinada versão (ou emulação) do kernel linux, e não é possível executar uma versão diferente, pois as imagens não possuem kernel.
 
 #### 1.3. O que são containers?
+
+Container é o nome dado para a segregação de processos no mesmo kernel, de forma que o processo seja isolado o máximo possível de todo o resto do ambiente.
+
+Em termos práticos são File Systems, criados a partir de uma "imagem" e que podem possuir também algumas características próprias.
+
+![](img/o-que-sao-containers.png)
+
+- https://www.docker.com/what-container
 
 #### 1.4. O que são imagens Docker ?
 
