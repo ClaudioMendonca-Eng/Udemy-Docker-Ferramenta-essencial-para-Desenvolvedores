@@ -20,9 +20,11 @@ https://www.udemy.com/curso-docker/learn/v4/overview
 
 ## <a name="parte1">Seção: 1 - Introdução (5)</a>
 
+- [Mateiral do Curso/Instrutor](https://github.com/cod3rcursos/curso-docker)
 
+- [PDF do curso](pdf/apostila-docker.pdf)
 
-[Voltar ao Índice](#indice)
+[Voltar ao Índice](#indice
 
 ---
 
