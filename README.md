@@ -545,7 +545,53 @@ Permite o envio de uma imagem ou tag local para um registry.
 
 #### 4.5. Docker Hub × Docker Registry
 
+**Docker Registry**  
+É uma aplicação server side para guardar e distribuir imagens Docker. 
+
+**Docker Hub**  
+É uma serviço de registro de imagens Docker em nuvem, que permite a associação com repositórios para build automatizado de imagens. Imagens marcadas como oficiais no Docker Hub, são criadas pela própria Docker Inc. E o código fonte pode ser encontrado em:
+- https://github.com/docker-library
+
+A linha de comando possui o comando docker search <tag> para procurar imagens no Docker Hub.
+
 #### 4.6. Construção de uma imagem
+
+Processo para gerar uma nova imagem a partir de um arquivo de instruções. O comando docker build é o responsável por ler um Dockerfile e produzir uma nova imagem Docker.
+
+**Dockerfile**  
+Nome default para o arquivo com instruções para o build de imagens Docker. Documentação do Dockerfile — https://docs.docker.com/engine/reference/builder
+
+```
+# docker image build -t ex-simple-build .
+[+] Building 1.0s (6/6) FINISHED
+ => [internal] load build definition from Dockerfile                                  0.1s
+ => => transferring dockerfile: 122B                                                  0.0s
+ => [internal] load .dockerignore                                                     0.0s
+ => => transferring context: 2B                                                       0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.13                         0.0s
+ => [1/2] FROM docker.io/library/nginx:1.13                                           0.2s
+ => [2/2] RUN echo '<h1>Hello World !</h1>' > /usr/share/nginx/html/index.html        0.5s
+ => exporting to image                                                                0.1s
+ => => exporting layers                                                               0.1s
+ => => writing image sha256:250bdd713c909deb323989c4572297d5f8a73eb5e8ba117d9752d86c  0.0s
+ => => naming to docker.io/library/ex-simple-build                                    0.0s5
+Status: Downloaded newer image for docker.io/nginx:1.13
+ ---> ae513a47849c
+Step 2/2 : RUN echo '<h1>Hello World !</h1>' > /usr/share/nginx/html/index.html
+ ---> Running in 65d04840a156
+ ---> 74f08697b0a1
+Removing intermediate container 65d04840a156
+# docker image ls
+REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
+ex-simple-build                     latest               250bdd713c90        2 minutes ago      109MB
+# docker container run -p 8080:80 ex-simple-build
+172.17.0.1 - - [19/Oct/2022:21:54:11 +0000] "GET / HTTP/1.1" 200 23 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" "-"
+```
+
+Exemplo básico de um build e sua execução.
+
+O comando build exige a informação do diretório aonde o build será executado bem como aonde o arquivo de instruções se encontra
+
 
 #### 4.7. Instruções para a preparação da imagem
 
