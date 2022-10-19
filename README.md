@@ -459,6 +459,65 @@ Todos os subcomandos relativos ao container podem ser listados através do parâ
 
 #### 4.3. Entendendo melhor as imagens
 
+Toda imagem (bem como os containers) possuem um identificador único em formato hash usando sha256. Porém seu uso não é muito prático, então para simplificar isto o docker utiliza uma tag para identificar imagens.
+
+A tag normalmente é formada por um nome, seguido de : dois pontos e depois uma versão. É extremamente comum utilizar uma versão chamada latest para representar a versão mais atual.
+
+Exemplos de tags de imagens:
+- nginx:latest
+- redis:3.2
+- redis:3
+- postgres:9.5
+
+Na prática uma tag é apenas um ponteiro para o hash da imagem, e várias tags podem apontar para o mesmo hash. Com isto é comum o uso de alguns apelidos nas tags, tomando como exemplo as imagens oficiais do redis. Existem 10 imagens e 30 tags.
+
+Tags do redis
+
+- 3.0.7, 3.0
+- 3.0.7-32bit, 3.0-32bit
+- 3.0.7-alpine, 3.0-alpine
+- 3.0.504-windowsservercore, 3.0-windowsservercore
+- 3.0.504-nanoserver, 3.0-nanoserver
+- 3.2.8, 3.2, 3, latest
+- 3.2.8-32bit, 3.2-32bit, 3-32bit, 32bit
+- 3.2.8-alpine, 3.2-alpine, 3-alpine, alpine
+- 3.2.100-windowsservercore, 3.2-windowsservercore
+- 3-windowsservercore, windowsservercore
+- 3.2.100-nanoserver, 3.2-nanoserver, 3-nanoserver, nanoserver
+
+fonte: https://hub.docker.com/_/redis/
+
+```
+# docker image pull redis:latest
+latest: Pulling from library/redis
+bd159e379b3b: Already exists
+729b630784ac: Pull complete
+065c77bf222a: Pull complete
+961784053f68: Pull complete
+b42f16846808: Pull complete
+0f1fa5bb0033: Pull complete
+Digest: sha256:c95835a74c37b3a784fb55f7b2c211bd20c650d5e55dae422c3caa9c01eb39fa
+Status: Downloaded newer image for redis:latest
+# docker image ls
+REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
+redis                               latest               f8528f17261c        2 weeks ago        117MB
+# docker image tag redis:latest redis-claudiomendonca
+# docker image ls
+REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
+redis                                latest              f8528f17261c        2 weeks ago        117MB
+redis-claudiomendonca                latest              f8528f17261c        2 weeks ago        117MB
+# docker image rm redis:latest redis-claudiomendonca
+Untagged: redis:latest
+Untagged: redis@sha256:c95835a74c37b3a784fb55f7b2c211bd20c650d5e55dae422c3caa9c01eb39fa
+Untagged: redis-claudiomendonca:latest
+Deleted: sha256:f8528f17261c4a2c94ef702ff483ba7e4b998aa734cba60fa689ca5ecc14705f
+Deleted: sha256:ee56963c6d7b3a0282a5fa661ff94f9d85cee3c52058246ed243af49e724a55a
+Deleted: sha256:716572502758d2842fc9a1f4211a54c649babfdaea435e3f30b9b5aaf87cb06d
+Deleted: sha256:e44a83ab8337d6a95fcad0c1d250366c4079759ae5be8f6ce321dc4ea613217f
+Deleted: sha256:4267b0eb985fc1c59e8f523eb77202c30a6504d86186b1377d22e736061b321c
+Deleted: sha256:fc24995fdc7260d59418714deda07229a703bca3d64f6f19c7ade1e3c0fb2d55
+```
+
 #### 4.4. Comandos básicos no gerenciamento de imagens
 
 #### 4.5. Docker Hub × Docker Registry
