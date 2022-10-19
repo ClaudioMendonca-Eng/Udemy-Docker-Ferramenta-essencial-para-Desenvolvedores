@@ -1234,6 +1234,21 @@ O Docker Compose é uma ferramenta para definir e gerenciar aplicações docker 
 
 #### 2. Configurando Ambiente com Compose
 
+```
+# ls
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        19/10/2022     20:12                backend
+d-----        19/10/2022     20:07                frontend
+-a----        19/10/2022     20:14            341 docker-compose.yml
+# docker-compose up
+ - Network 5-8-projeto-cadastro-simples_default       C...                                                0.9s
+ - Container 5-8-projeto-cadastro-simples-backend-1   Created                                             0.6s
+ - Container 5-8-projeto-cadastro-simples-frontend-1  Created                                             0.6s
+ - Container 5-8-projeto-cadastro-simples-db-1        Cr...                                               0.6s
+(...)
+```
+
 
 #### 3. Finalizando o Cadastro
 
