@@ -653,7 +653,44 @@ Claudio Mendonça. <contato@claudiomendonca.eng.br>
 
 #### 4.8. Instruções para povoamento da imagem
 
+**COPY**  
+Copia arquivos e diretórios para dentro da imagem.
 
+**ADD**  
+Similar ao anterior, mas com suporte extendido a URLs. Somente deve ser usado nos casos que a instrução COPY não atenda.
+
+**RUN**  
+Executa ações/comandos durante o build dentro da imagem
+
+**Exercício 12 - Uso das instruções de povoamento**
+
+```
+FROM nginx:1.13
+LABEL maintainer 'Juracy Filho <juracy at gmail.com>'
+RUN echo '<h1>Sem conteúdo</h1>' > /usr/share/nginx/html/conteudo.html
+COPY *.html /usr/share/nginx/html/
+```
+
+```
+# docker image build -t ex-build-copy .
+[+] Building 0.9s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                                  0.1s
+ => => transferring dockerfile: 230B                                                  0.0s
+ => [internal] load .dockerignore                                                     0.0s
+ => => transferring context: 2B                                                       0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.13                         0.0s
+ => CACHED [1/3] FROM docker.io/library/nginx:1.13                                    0.0s
+ => [internal] load build context                                                     0.1s
+ => => transferring context: 413B                                                     0.0s
+ => [2/3] RUN echo '<h1>Sem conteúdo</h1>' > /usr/share/nginx/html/conteudo.html      0.5s
+ => [3/3] COPY *.html /usr/share/nginx/html/                                          0.1s
+ => exporting to image                                                                0.1s
+ => => exporting layers                                                               0.1s
+ => => writing image sha256:9fe5a71b4b7809f91838ac6912eed50b845c2aa33ce2d48bc28b054b  0.0s
+ => => naming to docker.io/library/ex-build-copy                                      0.0s
+# docker container run -p 8080:80 ex-build-copy
+172.17.0.1 - - [19/Oct/2022:22:21:03 +0000] "GET / HTTP/1.1" 200 374 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" "-"
+```
 
 #### 4.9. Instruções com configuração para execução do container
 
