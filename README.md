@@ -595,7 +595,65 @@ O comando build exige a informação do diretório aonde o build será executado
 
 #### 4.7. Instruções para a preparação da imagem
 
+**FROM**  
+Especifica a imagem base a ser utilizada pela nova imagem.
+
+**LABEL**  
+Especifica vários metadados para a imagem como o mantenedor. A especificação do mantenedor era feita usando a instrução específica, MAINTAINER que foi substituída pelo LABEL.
+
+**ENV**  
+Especifica variáveis de ambiente a serem utilizadas durante o build.
+
+**ARG**  
+Define argumentos que poderão ser informados ao build através do parâmetro --build-arg.
+
+```
+FROM debian
+LABEL maintainer 'Claudio Mendonça. <contato@claudiomendonca.eng.br>'
+ARG S3_BUCKET=files
+ENV S3_BUCKET=${S3_BUCKET}
+```
+
+```
+# docker image build -t ex-build-args .
+[+] Building 0.2s (5/5) FINISHED
+ => [internal] load build definition from Dockerfile                                  0.0s
+ => => transferring dockerfile: 175B                                                  0.0s
+ => [internal] load .dockerignore                                                     0.0s
+ => => transferring context: 2B                                                       0.0s
+ => [internal] load metadata for docker.io/library/debian:latest                      0.0s
+ => [1/1] FROM docker.io/library/debian                                               0.0s
+ => exporting to image                                                                0.0s
+ => => exporting layers                                                               0.0s
+ => => writing image sha256:3ee35ed74a5dd27593c2c8c2b1485ecf040220e8a523a9a48d31e0ed  0.0s
+ => => naming to docker.io/library/ex-build-args                                      0.0s
+# docker image ls
+REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
+ex-build-args                        latest              3ee35ed74a5d        2 weeks ago          124MB
+ex-simple-build                       latest             250bdd713c90        10 minutes ago       109MB 
+# docker container run ex-build-args bash -c 'echo $S3_BUCKET'
+files
+# docker image build --build-arg S3_BUCKET=myapp -t ex-build-arg .
+[+] Building 0.2s (5/5) FINISHED
+ => [internal] load build definition from Dockerfile                                  0.0s
+ => => transferring dockerfile: 32B                                                   0.0s
+ => [internal] load .dockerignore                                                     0.0s
+ => => transferring context: 2B                                                       0.0s
+ => [internal] load metadata for docker.io/library/debian:latest                      0.0s
+ => CACHED [1/1] FROM docker.io/library/debian                                        0.0s
+ => exporting to image                                                                0.0s
+ => => exporting layers                                                               0.0s
+ => => writing image sha256:0bdabbed8392aa154cdc930419c71af591984bec76d768a348ad066c  0.0s
+ => => naming to docker.io/library/ex-build-arg                                       0.0s
+# docker container run ex-build-arg bash -c 'echo $S3_BUCKET'
+myapp
+# docker image inspect --format="{{index .Config.Labels \"maintainer\"}}" ex-build-args
+Claudio Mendonça. <contato@claudiomendonca.eng.br>
+```
+
 #### 4.8. Instruções para povoamento da imagem
+
+
 
 #### 4.9. Instruções com configuração para execução do container
 
