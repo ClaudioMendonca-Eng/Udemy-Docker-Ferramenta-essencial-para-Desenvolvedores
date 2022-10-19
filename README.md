@@ -815,7 +815,25 @@ Password:
 
 ## <a name="parte6"> Seção: 6 - Redes (4)</a>
 
+#### 6.1. Visão Geral e Tipos de Redes (somente vídeo)
 
+![](img/rede-Introducao.png)
+![](img/rede-Introducao_2.png)
+
+```
+ # docker network ls
+NETWORK ID          NAME                        DRIVER              SCOPE
+01d182c53758        bridge                      bridge              local
+b709d632246d        host                        host                local
+f835sw4c2415        node-mogo-compose_default   bridge              local
+c8a9baq37245        none                        null                local
+```
+
+#### 6.2. Rede Tipo None  (Sem Rede)
+
+#### 6.3. Rede Tipo Bridge
+
+#### 6.4. Rede Tipo Host
 
 [Voltar ao Índice](#indice)
 
