@@ -694,6 +694,109 @@ COPY *.html /usr/share/nginx/html/
 
 #### 4.9. Instruções com configuração para execução do container
 
+**EXPOSE**  
+Informa ao Docker que a imagem expõe determinadas portas remapeadas no container. A exposição da porta não é obrigatória a partir do uso do recurso de redes internas do Docker. Recurso que veremos em Coordenando múltiplos containers. Porém a exposição não só ajuda a documentar como permite o mapeamento rápido através do parâmetro -P do docker container run.
+
+**WORKDIR**  
+Indica o diretório em que o processo principal será executado.
+
+**ENTRYPOINT**  
+Especifica o processo inicial do container.
+
+**CMD**  
+Indica parâmetros para o ENTRYPOINT.
+
+**USER**  
+Especifica qual o usuário que será usado para execução do processo no container (ENTRYPOINT e CMD) e instruções RUN durante o build.
+
+**VOLUME**  
+Instrui a execução do container a criar um volume para um diretório indicado e copia todo o conteúdo do diretório na imagem para o volume criado. Isto simplificará no futuro, processos de compartilhamento destes dados para backup por exemplo.
+
+**Exercício 13 - Uso das instruções para execução do container**
+
+```
+FROM python:3.6
+LABEL maintainer 'José Malcher JR. <contato@josemalcher.net>'
+RUN useradd www && \
+    mkdir /app && \
+    mkdir /log && \
+    chown www /log
+USER www
+VOLUME /log
+WORKDIR /app
+EXPOSE 8000
+ENTRYPOINT ["/usr/local/bin/python"]
+CMD ["run.py"]
+```
+
+
+```
+# docker image build -t ex-build-dev .
+[+] Building 75.1s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                                                      0.0s
+ => => transferring dockerfile: 320B                                                                      0.0s
+ => [internal] load .dockerignore                                                                         0.0s
+ => => transferring context: 2B                                                                           0.0s
+ => [internal] load metadata for docker.io/library/python:3.6                                             2.6s
+ => [auth] library/python:pull token for registry-1.docker.io                                             0.0s
+ => [1/3] FROM docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819  66.4s
+ => => resolve docker.io/library/python:3.6@sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819d  0.0s
+ => => sha256:f8652afaf88c25f0d22354d547d892591067aa4026a7fa9a6819df9f300af6fc 1.86kB / 1.86kB            0.0s
+ => => sha256:d097a4907a8ec079df5ac31872359c2de510f82214c0448e926393b376d3b60d 2.22kB / 2.22kB            0.0s
+ => => sha256:0e29546d541cdbd309281d21a73a9d1db78665c1b95b74f32b009e0b77a6e1e3 54.92MB / 54.92MB         22.8s
+ => => sha256:54260638d07c5e3ad24c6e21fc889abbc8486a27634c0892086ff71f3f44b104 9.27kB / 9.27kB            0.0s
+ => => sha256:9b829c73b52b92b97d5c07a54fb0f3e921995a296c714b53a32ae67d19231fcd 5.15MB / 5.15MB            3.2s
+ => => sha256:cb5b7ae361722f070eca53f35823ed21baa85d61d5d95cd5a95ab53d740cdd56 10.87MB / 10.87MB          3.8s
+ => => sha256:6494e4811622b31c027ccac322ca463937fd805f569a93e6f15c01aade718793 54.57MB / 54.57MB         21.8s
+ => => sha256:6f9f74896dfa93fe0172f594faba85e0b4e8a0481a0fefd9112efc7e4d3c78f7 196.51MB / 196.51MB       41.2s
+ => => sha256:5e3b1213efc56598e78bd602983945c164de2a37205e06a62dada823124dc743 6.29MB / 6.29MB           26.2s
+ => => sha256:9fddfdc56334f2e6efad7e241bf5e7459c40ed105c5478676f41c1244bd96752 14.21MB / 14.21MB         26.8s
+ => => extracting sha256:0e29546d541cdbd309281d21a73a9d1db78665c1b95b74f32b009e0b77a6e1e3                16.6s
+ => => sha256:404f02044bac0432ca522cbb9f254b1c91fcea6806bfeef0be0b243b2f31bab7 235B / 235B               26.8s
+ => => sha256:c4f42be2be53b900ebffc040c1df13de538434ccc5f5d954a56848a6169a3a3f 2.21MB / 2.21MB           28.5s
+ => => extracting sha256:9b829c73b52b92b97d5c07a54fb0f3e921995a296c714b53a32ae67d19231fcd                 0.6s
+ => => extracting sha256:cb5b7ae361722f070eca53f35823ed21baa85d61d5d95cd5a95ab53d740cdd56                 0.5s
+ => => extracting sha256:6494e4811622b31c027ccac322ca463937fd805f569a93e6f15c01aade718793                 5.1s
+ => => extracting sha256:6f9f74896dfa93fe0172f594faba85e0b4e8a0481a0fefd9112efc7e4d3c78f7                14.8s
+ => => extracting sha256:5e3b1213efc56598e78bd602983945c164de2a37205e06a62dada823124dc743                 0.5s
+ => => extracting sha256:9fddfdc56334f2e6efad7e241bf5e7459c40ed105c5478676f41c1244bd96752                 1.1s
+ => => extracting sha256:404f02044bac0432ca522cbb9f254b1c91fcea6806bfeef0be0b243b2f31bab7                 0.0s
+ => => extracting sha256:c4f42be2be53b900ebffc040c1df13de538434ccc5f5d954a56848a6169a3a3f                 0.5s
+ => [2/3] RUN useradd www &&     mkdir /app &&     mkdir /log &&     chown www /log                       5.6s
+ => [3/3] WORKDIR /app                                                                                    0.1s
+ => exporting to image                                                                                    0.2s
+ => => exporting layers                                                                                   0.1s
+ => => writing image sha256:345ac8f24cbbcc996f9deebc607481a0a768a040d4cd2e8169e4abda7ad6b6fd              0.0s
+ => => naming to docker.io/library/ex-build-dev                                                           0.0s
+ 
+# docker container run -it -v $(pwd):/app:Z -p 8080:8000 --name python-server ex-build-dev
+inicializando...
+escutando a porta: 8000
+usuário: www
+172.17.0.1 - - [19/Oct/2022 22:31:20] "GET / HTTP/1.1" 200 -
+# docker container run -it --volumes-from=python-server debian cat /log/http-server.log
+2022-10-19 22:30:26,763 - INFO - inicializando...
+2022-10-19 22:30:26,764 - INFO - escutando a porta: 8000
+2022-10-19 22:30:26,765 - INFO - usuário: www
+2022-10-19 22:31:20,686 - INFO - 172.17.0.1 - - [19/Oct/2022 22:31:20] "GET / HTTP/1.1" 200 -
+2022-10-19 22:31:20,703 - INFO - 172.17.0.1 - - [19/Oct/2022 22:31:20] "GET / HTTP/1.1" 200 -
+```
+
+Neste exemplo temos um pequeno servidor web atendendo na porta 8000 e exposta via instrução EXPOSE.
+
+Também temos o uso do ENTRYPOINT e CMD definindo exatamente que processo será executado ao subir o container, podemos notar que o container consegue encontrar o run.py, por conta da instrução WORKDIR que define o diretório aonde o processo principal será executado.
+
+Ao executar o container, uma das informações colocados no log (stdout e arquivo em disco) é o usuário corrente, e podemos notar que o processo não está rodando como root e sim www, conforme foi definido pela instrução USER.
+
+Por último temos o comando VOLUME que instrui o docker a expor o diretório /log como um volume, que pode ser facilmente mapeado por outro container. Podemos verificar isto seguindo os seguintes passos:
+- Construir a imagem e executar o container: run.sh
+- Acessar a URL http://localhost:8000 via browser
+- Verificar o log gerado na saída do container criado
+- Criar e rodar um segundo container mapeando os volumes do primeiro e checar o arquivo de log: docker run -it --volumes-from=<container criado> debian cat /log/http-server.log
+- Importante substituir a referência do volumes_from pelo hash do primeiro container criado
+- O resultado do cat será o mesmo log já gerado pelo primeiro container
+
+
 [Voltar ao Índice](#indice)
 
 ---
