@@ -806,6 +806,7 @@ Por último temos o comando VOLUME que instrui o docker a expor o diretório /lo
 # docker login --username=claudio
 Password:
 # docker image push claudio/img-exemplo:1.0
+```
 
 
 [Voltar ao Índice](#indice)
@@ -830,6 +831,42 @@ c8a9baq37245        none                        null                local
 ```
 
 #### 6.2. Rede Tipo None  (Sem Rede)
+
+![](img/6-2-RedeTipoNone.png)
+
+```
+# docker container run --rm alpine ash -c "ifconfig"
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+213ec9aee27d: Already exists
+Digest: sha256:bc41182d7ef5ffc53a40b044e725193bc10142a1243f395ee852a8d9730fc2ad
+Status: Downloaded newer image for alpine:latest
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02
+          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:2 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:180 (180.0 B)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+# docker container run --rm --net none  alpine ash -c "ifconfig"
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+```
+
+
 
 #### 6.3. Rede Tipo Bridge
 
