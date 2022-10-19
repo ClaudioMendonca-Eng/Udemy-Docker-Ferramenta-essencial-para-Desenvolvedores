@@ -364,6 +364,42 @@ Mapeamento de volumes
 - Parar a execução do container
 
 #### 3.6. Modo daemon
+Agora sim, aonde o Docker começa a brilhar!
+
+Antes de conhecer opções mais avançadas de compartilhamento de recursos, isolamento, etc, precisamos entender como rodar os containers em background. O parâmetro -d do docker container run indica ao Docker para iniciar o container em background (modo daemon).
+
+Para entender melhor estes containers precisaremos conhecer um novo comando: docker container ps, que lista containers em execução.
+
+**Exercício 8 - Rodar um servidor web em background**
+
+```
+# docker container run -d --name ex-daemon-basic -p 8080:80 -v $(pwd)/html:/usr/share/nginx/html:Z nginx
+ex-daemon-basic,nginx
+Up 28 seconds, PORTA: 0.0.0.0:8080->80/tcp
+# docker container stop ex-daemon-basic 
+ex-daemon-basic
+```
+
+Execução em background
+- Levanta o container em background
+- Tentar acessar a url http://localhost:8080 via browser
+- Receber o texto: Hello World
+- Verificar os containers em execução
+
+**Exercício 9 - Gerenciar o container em background**
+
+```
+# docker container restart ex-daemon-basic
+# docker container stop ex-daemon-basic
+# docker container start ex-daemon-basic
+```
+
+Reiniciar, parar e iniciar
+- Reinicia o container e verifica que acabou de iniciar pelo tempo do status
+- Para o container e através do docker container ps vemos que não está mais em execução
+- Podemos também tentar acessar pelo browser a url http://localhost:8080, confirmando que não responde mais
+- Inicia novamente o container, um observação importante é que não é mais necessário configurar os mapeamentos
+- Verificar os containers em execução, também é possível confirmar a execução pelo browser.
 
 #### 3.7. Manipulação de containers em modo daemon
 
