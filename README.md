@@ -1517,8 +1517,22 @@ TESTE DO ENVIO DO FORMULARIO:
 -worker-2  | 2022-10-23T21:39:43.326426800Z Mensagem Teste 03 Assunto! enviada
 ```
 
-
 #### 9.10. Boas práticas — Variáveis de ambiente
+
+Seria aula de personalizar as variaveis de ambiente.
+
+Visualização do banco de dados:
+```
+# docker-compose exec db psql -U postgres -d email_sender -c 'select * from emails'
+ id |            data            |         assunto         |        mensagem
+----+----------------------------+-------------------------+-------------------------
+  1 | 2022-10-23 20:46:24.362197 | Teste de texto assunto! | Teste do texto mensagem
+  2 | 2022-10-23 21:09:09.60662  | Teste 01 Assunto!       | Teste 01 Mensagem.....
+  3 | 2022-10-23 21:38:49.726346 | Teste 01 Assunto!       | Teste 01 Mensagem.....
+  4 | 2022-10-23 21:39:00.466614 | Teste 02 Assunto!       | Teste 02 Mensagem.....
+  5 | 2022-10-23 21:39:07.282295 | Teste 03 Assunto!       | Teste 03 Mensagem.....
+(5 rows)
+```
 
 #### 9.11. Override
 
