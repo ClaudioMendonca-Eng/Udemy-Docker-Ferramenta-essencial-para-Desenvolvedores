@@ -1302,12 +1302,12 @@ Componentes
    - 11087f2b0d87 Pull complete                                                                                   19.5s
    - 4b9a74ac6ea0 Pull complete                                                                                   19.6s
 [+] Running 2/2
- - Network 9-projetoparaenviodee-mailscomworkers_default  Created                                                  0.8s
- - Container 9-projetoparaenviodee-mailscomworkers-db-1   Started                                                  2.9s
+ - Network 9-default  Created                                                  0.8s
+ - Container db-1   Started                                                  2.9s
 # docker-compose ps
                    Name                                 Command              State    Ports  
 ---------------------------------------------------------------------------------------------
-9-projetoparaenviodee-mailscomworkers_db_1   docker-entrypoint.sh postgres   Up      5432/tcp
+9-db_1   docker-entrypoint.sh postgres   Up      5432/tcp
 # docker-compose exec db psql -U postgres -c '\l'
                                  List of databases
    Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
@@ -1320,8 +1320,8 @@ Componentes
 (3 rows)
 # docker-compose down
 [+] Running 2/2
- - Container 9-projetoparaenviodee-mailscomworkers-db-1   Removed                                                  0.4s
- - Network 9-projetoparaenviodee-mailscomworkers_default  Removed                                                  0.6s
+ - Container db-1   Removed                                                  0.4s
+ - Network 9-default  Removed                                                  0.6s
 ```
 
 #### 9.3. Volumes
@@ -1331,12 +1331,12 @@ Componentes
 Name   Command   State   Ports
 ------------------------------
 # docker-compose up -d
-Creating network "9-projetoparaenviodee-mailscomworkers_default" with the default driver
-Creating 9-projetoparaenviodee-mailscomworkers_db_1 ... done
+Creating network "9-default" with the default driver
+Creating 9-db_1 ... done
 # docker-compose ps
                    Name                                 Command              State    Ports  
 ---------------------------------------------------------------------------------------------
-9-projetoparaenviodee-mailscomworkers_db_1   docker-entrypoint.sh postgres   Up      5432/tcp
+9-db_1   docker-entrypoint.sh postgres   Up      5432/tcp
 # docker-compose exec db psql -U postgres -f scripts/check.sql                                  List of databases
      Name     |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
 --------------+----------+----------+------------+------------+-----------------------
@@ -1369,17 +1369,17 @@ docker-compose ps
 Name   Command   State   Ports
 ------------------------------
 # docker-compose up -d
-Creating network "9-projetoparaenviodee-mailscomworkers_default" with the default driver
-Creating 9-projetoparaenviodee-mailscomworkers_db_1       ... done
-Creating 9-projetoparaenviodee-mailscomworkers_frontend_1 ... done
+Creating network "9-default" with the default driver
+Creating 9-db_1       ... done
+Creating 9-frontend_1 ... done
 # docker-compose logs -f -t
-9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:14:59.331862200Z
-9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:14:59.331931500Z PostgreSQL Database directory appears to contain a database; Skipping initialization
-9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:14:59.331944900Z
-9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:15:00.020299000Z LOG:  database system was shut down at 2022-10-23 18:12:47 UTC
-9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:15:00.091458400Z LOG:  MultiXact member wraparound protections are now enabled
-9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:15:00.096101300Z LOG:  autovacuum launcher started
-9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:15:00.096404500Z LOG:  database system is ready to accept connections
+db-1        | 2022-10-23T18:14:59.331862200Z
+db-1        | 2022-10-23T18:14:59.331931500Z PostgreSQL Database directory appears to contain a database; Skipping initialization
+db-1        | 2022-10-23T18:14:59.331944900Z
+db-1        | 2022-10-23T18:15:00.020299000Z LOG:  database system was shut down at 2022-10-23 18:12:47 UTC
+db-1        | 2022-10-23T18:15:00.091458400Z LOG:  MultiXact member wraparound protections are now enabled
+db-1        | 2022-10-23T18:15:00.096101300Z LOG:  autovacuum launcher started
+db-1        | 2022-10-23T18:15:00.096404500Z LOG:  database system is ready to accept connections
 ```
 
 ![](img/9-4-ront-end.png)
@@ -1392,12 +1392,12 @@ $ docker-compose ps
 Name   Command   State   Ports
 ------------------------------
 # docker-compose up -d
-Creating network "9-projetoparaenviodee-mailscomworkers_default" with the default driver
-Creating 9-projetoparaenviodee-mailscomworkers_app_1      ... done
-Creating 9-projetoparaenviodee-mailscomworkers_db_1       ... done
-Creating 9-projetoparaenviodee-mailscomworkers_frontend_1 ... done
+Creating network "9-default" with the default driver
+Creating 9-app_1      ... done
+Creating 9-db_1       ... done
+Creating 9-frontend_1 ... done
 # docker-compose logs -f -t
-Attaching to 9-projetoparaenviodee-mailscomworkers_frontend_1, 9-projetoparaenviodee-mailscomworkers_app_1, 9-projetoparaenviodee-mailscomworkers_db_1
+Attaching to 9-frontend_1, 9-app_1, 9-db_1
 db_1        | 2019-05-31T00:42:06.363286000Z LOG:  database system was shut down at 2019-05-29 13:44:49 UTC
 db_1        | 2019-05-31T00:42:06.573055000Z LOG:  MultiXact member wraparound protections are now enabled
 db_1        | 2019-05-31T00:42:06.887140000Z LOG:  autovacuum launcher started
@@ -1459,14 +1459,14 @@ OBS: teve um ERRO ao importar pycopg:
 |   File "/usr/local/lib/python3.6/site-packages/psycopg2/__init__.py", line 50, in <module>
 |     from psycopg2._psycopg import (                     # noqa
 | ImportError: /usr/local/lib/python3.6/site-packages/psycopg2/.libs/libresolv-2-c4c53def.5.so: undefined symbol: __res_maybe_init, version GLIBC_PRIVATE
-9-projetoparaenviodee-mailscomworkers-app-1 exited with code 1
+app-1 exited with code 1
 ```
 
 Resolvi este problema mudando a versão do python para 3.7.2 no arquivo docker-compose.yml. 
 
 #### 9.8. Workers
 
-Criação das rede FILAS e dois Containers (worker e queue)
+Criação das rede FILAS e dois containers (worker e queue)
 
 worker = versão simulada de entrega de e-mail.
 
@@ -1484,6 +1484,39 @@ TESTE DO ENVIO DO FORMULARIO:
 
 
 #### 9.9. Múltiplas instâncias
+
+Apartir de um container criar varias estâncias worker_1, worker_2 e worker_3, para escalar de forma individual.
+Começando com a criação de uma imagem personalizada WORK.
+
+```
+# docker-compose up -d --scale worker=3
+[+] Running 10/10
+ - Network 9-fila          Created                                             0.7s
+ - Network 9-banco         Created                                             0.8s
+ - Network 9-web           Created                                             0.8s
+ - Container queue-1     Started                                             4.4s
+ - Container db-1        Started                                             4.4s
+ - Container worker-3    Started                                             7.4s
+ - Container worker-1    Started                                             6.6s
+ - Container app-1       Started                                             7.9s
+ - Container worker-2    Started                                             7.6s
+ - Container frontend-1  Started                                             8.0s
+# logs -f -t worker
+worker-2  | 2022-10-23T21:34:39.464728000Z Aguardando mensagens ...
+worker-1  | 2022-10-23T21:34:38.470684400Z Aguardando mensagens ...
+worker-3  | 2022-10-23T21:34:39.103390700Z Aguardando mensagens ...
+```
+
+TESTE DO ENVIO DO FORMULARIO:
+```
+-worker-1  | 2022-10-23T21:38:49.738603300Z Mandando a mensagem: Teste 01 Assunto!
+-worker-3  | 2022-10-23T21:39:00.474410000Z Mandando a mensagem: Teste 02 Assunto!
+-worker-2  | 2022-10-23T21:39:07.290081600Z Mandando a mensagem: Teste 03 Assunto!
+-worker-3  | 2022-10-23T21:39:22.494580600Z Mensagem Teste 02 Assunto! enviada
+-worker-1  | 2022-10-23T21:39:34.774432600Z Mensagem Teste 01 Assunto! enviada
+-worker-2  | 2022-10-23T21:39:43.326426800Z Mensagem Teste 03 Assunto! enviada
+```
+
 
 #### 9.10. Boas práticas — Variáveis de ambiente
 
