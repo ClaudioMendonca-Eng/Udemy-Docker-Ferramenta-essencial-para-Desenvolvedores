@@ -1536,4 +1536,19 @@ Visualização do banco de dados:
 
 #### 9.11. Override
 
+Escrever outo arquivo compose sobreescrever uma variavel de ambiente local.
+
+O docker-compose.override.ymlé o arquivo de configuração onde você pode substituir as configurações existentes docker-compose.ymlou até mesmo adicionar serviços completamente novos.
+
+Por padrão, esse arquivo não existe e você deve criá-lo. Você pode copiar o existente docker-compose.override.yml-exampleou criar um novo.
+
+Como funciona o docker-compose.override.yml?
+Quando você executa , ele procura um arquivo chamado e lê todos os serviços, redes, volumes etc. configurados para criar sua pilha do Docker. Se você também tiver um arquivo chamado , ele também será lido e usado como um arquivo de substituição para complementar. Funciona na seguinte ordem:docker-compose updocker-compose.ymldocker-compose.override.yml
+
+1. Todas as definições de docker-compose.ymlserão usadas
+2. Todas as definições que também são definidas em docker-compose.override.ymlsubstituirão automaticamente as configurações dedocker-compose.yml
+3. Todas as definições disponíveis apenas em docker-compose.override.ymlserão adicionadas adicionalmente.
+
+Para iniciar sua pilha do Docker Compose, não há etapas adicionais ou argumentos de linha de comando necessários. Se ambos os arquivos existirem, eles serão lidos automaticamente.
+
 [Voltar ao Índice](#indice)
