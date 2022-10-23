@@ -1432,7 +1432,7 @@ server {
 }
 ```
 
-E no arquivo docker-compose.yml acrecentamos em volume:
+E no arquivo docker-compose.yml acrecentamos em volumes:
 
 ```
 # Configuração do proxy reverso
@@ -1441,6 +1441,8 @@ E no arquivo docker-compose.yml acrecentamos em volume:
 ```
 
 #### 9.7. Redes
+
+
 
 #### 9.8. Workers
 
