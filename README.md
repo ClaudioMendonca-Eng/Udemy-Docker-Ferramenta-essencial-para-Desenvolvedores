@@ -1407,6 +1407,39 @@ app_1       | 2019-05-31T00:42:09.632657000Z Collecting bottle==0.12.13
 
 #### 9.6. Proxy reverso
 
+Um proxy reverso lida com solicitações de clientes e, em seguida, encaminha essas solicitações para outro servidor executado no back-end. Esse servidor de origem de backend processa a solicitação e fornece uma resposta de volta ao Nginx, que então envia a resposta de volta ao cliente.
+
+No aquivo default.conf dentro da pasta nginx faz a configuração:
+```
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+
+    location /api {
+        proxy_pass http://app:8080/;
+        proxy_http_version 1.1;
+    }
+}
+```
+
+E no arquivo docker-compose.yml acrecentamos em volume:
+
+```
+# Configuração do proxy reverso
+- ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+```
+
 #### 9.7. Redes
 
 #### 9.8. Workers
