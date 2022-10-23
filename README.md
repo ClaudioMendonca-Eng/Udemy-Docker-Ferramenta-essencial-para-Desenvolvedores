@@ -1326,6 +1326,40 @@ Componentes
 
 #### 9.3. Volumes
 
+```
+# docker-compose ps
+Name   Command   State   Ports
+------------------------------
+# docker-compose up -d
+Creating network "9-projetoparaenviodee-mailscomworkers_default" with the default driver
+Creating 9-projetoparaenviodee-mailscomworkers_db_1 ... done
+# docker-compose ps
+                   Name                                 Command              State    Ports  
+---------------------------------------------------------------------------------------------
+9-projetoparaenviodee-mailscomworkers_db_1   docker-entrypoint.sh postgres   Up      5432/tcp
+# docker-compose exec db psql -U postgres -f scripts/check.sql                                  List of databases
+     Name     |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+--------------+----------+----------+------------+------------+-----------------------
+ email_sender | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ postgres     | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0    | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+              |          |          |            |            | postgres=CTc/postgres
+ template1    | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+              |          |          |            |            | postgres=CTc/postgres
+(4 rows)
+
+You are now connected to database "email_sender" as user "postgres".
+                                    Table "public.emails"
+  Column  |            Type             |                      Modifiers
+----------+-----------------------------+-----------------------------------------------------
+ id       | integer                     | not null default nextval('emails_id_seq'::regclass)
+ data     | timestamp without time zone | not null default now()
+ assunto  | character varying(100)      | not null
+ mensagem | character varying(250)      | not null
+
+psql:scripts/check.sql:2: \connect: FATAL:  database "email_sender" does not exist
+```
+
 #### 9.4. Front-end
 
 #### 9.5. Filas
