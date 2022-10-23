@@ -1552,3 +1552,10 @@ Quando você executa , ele procura um arquivo chamado e lê todos os serviços, 
 Para iniciar sua pilha do Docker Compose, não há etapas adicionais ou argumentos de linha de comando necessários. Se ambos os arquivos existirem, eles serão lidos automaticamente.
 
 [Voltar ao Índice](#indice)
+
+---
+
+
+<a href="https://www.buymeacoffee.com/claudiomendonca" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+Copyright © 2022 <a href="https://www.claudiomendonca.eng.br" target="_blank">ClaudioMendonca.eng.br</a> . All rights reserved.
