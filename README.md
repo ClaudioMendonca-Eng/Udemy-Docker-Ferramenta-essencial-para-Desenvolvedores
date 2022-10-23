@@ -1284,6 +1284,46 @@ Componentes
 
 #### 9.2. Banco de dados
 
+```
+# docker-compose up -d
+ - db Pulled                                                                                                      23.4s
+   - 1cb79db8a9e7 Pull complete                                                                                   11.9s
+   - f6bae7873dd7 Pull complete                                                                                   12.6s
+   - 8f7722dc50a7 Pull complete                                                                                   12.8s
+   - e8622b8cb6f3 Pull complete                                                                                   13.0s
+   - d6d74bba3a57 Pull complete                                                                                   14.0s
+   - 874d4d2a09fd Pull complete                                                                                   14.2s
+   - 2d87c3a4038c Pull complete                                                                                   14.3s
+   - f955a6cf127b Pull complete                                                                                   14.5s
+   - f62dc55c568d Pull complete                                                                                   18.2s
+   - 4e2c4902efbd Pull complete                                                                                   18.4s
+   - 01c676df543a Pull complete                                                                                   19.1s
+   - 1e3d335ef0b7 Pull complete                                                                                   19.3s
+   - 11087f2b0d87 Pull complete                                                                                   19.5s
+   - 4b9a74ac6ea0 Pull complete                                                                                   19.6s
+[+] Running 2/2
+ - Network 9-projetoparaenviodee-mailscomworkers_default  Created                                                  0.8s
+ - Container 9-projetoparaenviodee-mailscomworkers-db-1   Started                                                  2.9s
+# docker-compose ps
+                   Name                                 Command              State    Ports  
+---------------------------------------------------------------------------------------------
+9-projetoparaenviodee-mailscomworkers_db_1   docker-entrypoint.sh postgres   Up      5432/tcp
+# docker-compose exec db psql -U postgres -c '\l'
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+-----------+----------+----------+------------+------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+(3 rows)
+# docker-compose down
+[+] Running 2/2
+ - Container 9-projetoparaenviodee-mailscomworkers-db-1   Removed                                                  0.4s
+ - Network 9-projetoparaenviodee-mailscomworkers_default  Removed                                                  0.6s
+```
+
 #### 9.3. Volumes
 
 #### 9.4. Front-end
