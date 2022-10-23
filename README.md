@@ -1362,6 +1362,29 @@ psql:scripts/check.sql:2: \connect: FATAL:  database "email_sender" does not exi
 
 #### 9.4. Front-end
 
+- 9-ProjetoparaEnviodeE-mailscomWorkers/web
+
+```
+docker-compose ps
+Name   Command   State   Ports
+------------------------------
+# docker-compose up -d
+Creating network "9-projetoparaenviodee-mailscomworkers_default" with the default driver
+Creating 9-projetoparaenviodee-mailscomworkers_db_1       ... done
+Creating 9-projetoparaenviodee-mailscomworkers_frontend_1 ... done
+# docker-compose logs -f -t
+9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:14:59.331862200Z
+9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:14:59.331931500Z PostgreSQL Database directory appears to contain a database; Skipping initialization
+9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:14:59.331944900Z
+9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:15:00.020299000Z LOG:  database system was shut down at 2022-10-23 18:12:47 UTC
+9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:15:00.091458400Z LOG:  MultiXact member wraparound protections are now enabled
+9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:15:00.096101300Z LOG:  autovacuum launcher started
+9-projetoparaenviodee-mailscomworkers-db-1        | 2022-10-23T18:15:00.096404500Z LOG:  database system is ready to accept connections
+```
+
+![](img/9-4-ront-end.png)
+
+
 #### 9.5. Filas
 
 #### 9.6. Proxy reverso
