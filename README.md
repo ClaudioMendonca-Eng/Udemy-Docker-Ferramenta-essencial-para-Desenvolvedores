@@ -1442,9 +1442,46 @@ E no arquivo docker-compose.yml acrecentamos em volumes:
 
 #### 9.7. Redes
 
+Criação das rede WEB, rede BANCO  e o APP com a persistência no banco de dados que foi submetida pelo formulario do front-end. 
 
+OBS: teve um ERRO ao importar pycopg:
+
+```
+| Requirement already satisfied: bottle==0.12.13 in /usr/local/lib/python3.6/site-packages (0.12.13)
+| Requirement already satisfied: psycopg2==2.7.1 in /usr/local/lib/python3.6/site-packages (2.7.1)
+| Requirement already satisfied: redis==2.10.5 in /usr/local/lib/python3.6/site-packages (2.10.5)
+| WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+| WARNING: You are using pip version 21.2.4; however, version 21.3.1 is available.
+| You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+| Traceback (most recent call last):
+|   File "sender.py", line 1, in <module>
+|     import psycopg2
+|   File "/usr/local/lib/python3.6/site-packages/psycopg2/__init__.py", line 50, in <module>
+|     from psycopg2._psycopg import (                     # noqa
+| ImportError: /usr/local/lib/python3.6/site-packages/psycopg2/.libs/libresolv-2-c4c53def.5.so: undefined symbol: __res_maybe_init, version GLIBC_PRIVATE
+9-projetoparaenviodee-mailscomworkers-app-1 exited with code 1
+```
+
+Resolvi este problema mudando a versão do python para 3.7.2 no arquivo docker-compose.yml. 
 
 #### 9.8. Workers
+
+Criação das rede FILAS e dois Containers (worker e queue)
+
+worker = versão simulada de entrega de e-mail.
+
+queue = que se basear em Redis:3.2
+
+TESTE DO ENVIO DO FORMULARIO:
+
+```
+| Mandando a mensagem: Teste 01 Assunto!
+| Mensagem registrada !
+| 172.31.0.1 - - [23/Oct/2022:21:09:09 +0000] "POST /api HTTP/1.1" 200 82 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" "-"
+| 172.31.0.3 - - [23/Oct/2022 21:09:09] "POST / HTTP/1.1" 200 82
+| Mensagem Teste 01 Assunto! enviada
+```
+
 
 #### 9.9. Múltiplas instâncias
 
